@@ -1,0 +1,31 @@
+[
+  {
+    "id": 1,
+    "fullName": "Mcaloo Ticky Burger",
+    "address": "50-300",
+    "phoneNumber": "yummy",
+    "email": "Burger"
+  },
+  {
+    "id": 2,
+    "fullName": "Freshly Club Sandwich",
+    "address": "60-250",
+    "phoneNumber": "stylist",
+    "email": "Sandwich"
+  },
+  {
+    "id": 3,
+    "fullName": "Dry fruit Smoothie",
+    "address": "100-500",
+    "phoneNumber": "flavorful",
+    "email": "Smoothy"
+  },
+  {
+    "id": 4,
+    "fullName": "Red Bull",
+    "address": "90-200",
+    "phoneNumber": "appetizing",
+    "email": "Drink"
+  }
+  
+]

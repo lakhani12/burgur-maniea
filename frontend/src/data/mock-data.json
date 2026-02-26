@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "fullName": "justin kuper",
+    "address": "Vesu",
+    "phoneNumber": "9081256718",
+    "email": "justin1@gmail.com"
+  },
+  {
+    "id": 2,
+    "fullName": "Sandip Sharama",
+    "address": "Mota Varachha",
+    "phoneNumber": "987654321",
+    "email": "justin223@gmail.com"
+  },
+  {
+    "id": 3,
+    "fullName": "Ravi Roy",
+    "address": "Nana Varachha",
+    "phoneNumber": "12345678",
+    "email": "harsh@gmail.com"
+  }
+  
+]
