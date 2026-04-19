@@ -5,27 +5,31 @@ import userRouter from './routes/userRouter.js';
 import productRouter from './routes/productRouter.js';
 import dotenv from 'dotenv'
 import orderRouter from './routes/OrderRouter.js';
-import path,{dirname} from 'path'
+import deliveryManRouter from './routes/deliveryManRouter.js';
+import categoryRouter from './routes/categoryRouter.js';
+import path, { dirname } from 'path'
 import { fileURLToPath } from 'url';
 dotenv.config()
 
 const app = express();
-app.use(express.json({ limit: '30mb', extended: true }))  // to parse body in json format (body parser)
-app.use(express.urlencoded({limit: '30mb',extended:true}))
-const PORT= process.env.PORT || 5001
-// const uri  = "mongodb+srv://Print-X:Pass%40123@cluster0.w844m.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-const uri = "~";
+app.use(express.json({ limit: '500mb', extended: true }))  // to parse body in json format (body parser)
+app.use(express.urlencoded({ limit: '500mb', extended: true }))
+const PORT = process.env.PORT || 5001
+const uri = "mongodb+srv://Print-X:Pass%40123@cluster0.w844m.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+// const uri = "~
 
 mongoose.connect(uri,
     err => {
-        if(err) throw err;
+        if (err) throw err;
         console.log('connected...')
     });
 
 app.use(cors())
-app.use('/api/users',userRouter);
-app.use('/api/products',productRouter)
-app.use('/api/orders',orderRouter)
+app.use('/api/users', userRouter);
+app.use('/api/products', productRouter)
+app.use('/api/orders', orderRouter)
+app.use('/api/deliverymen', deliveryManRouter);
+app.use('/api/categories', categoryRouter);
 
 //Serve static assests if in production
 
@@ -46,10 +50,10 @@ app.use('/api/orders',orderRouter)
 // }
 
 
-app.use((err,req,res,next)=>{
-    res.status(500).send({message:err.message})
+app.use((err, req, res, next) => {
+    res.status(500).send({ message: err.message })
 })
 
-app.listen(PORT,()=>{
+app.listen(PORT, () => {
     console.log(`server running at http://localhost:${PORT}`)
 });

@@ -35,7 +35,7 @@ orderRouter.post('/', isAuth, expressAsyncHandler(async (req, res) => {
     res.status(400).send({ message: 'cart is empty!' })
   }
   else {
-    const accessToken = oAuth2Client.getAccessToken();
+    // const accessToken = (await oAuth2Client.getAccessToken()).token;
     const newOrder = new Order({
       orderItems: req.body.orderItems,
       shippingAddress: req.body.shippingAddress,
@@ -46,13 +46,13 @@ orderRouter.post('/', isAuth, expressAsyncHandler(async (req, res) => {
       paymentId: req.body.paymentId,
       userId: req.user._id,
       email: req.body.email,
-      userName: req.body.userName
+      userName: req.body.userName,
+      orderType: req.body.orderType
     })
 
     const order = await newOrder.save()
 
-    //   let testAccount = await nodemailer.createTestAccount();
-
+    /*
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
       service: "gmail",
@@ -76,10 +76,8 @@ orderRouter.post('/', isAuth, expressAsyncHandler(async (req, res) => {
     });
 
     console.log("Message sent: %s", info.messageId);
-    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-
-    // Preview only available when sending through an Ethereal account
     console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    */
     res.status(201).send({ message: 'Order Placed !', order: order })
 
   }

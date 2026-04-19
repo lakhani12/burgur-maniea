@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../styles/sidebar.css";
-import { FaHome, FaBoxOpen, FaTimes, FaPlus,FaPersonBooth } from "react-icons/fa";
+import { FaHome, FaBoxOpen, FaTimes, FaPlus, FaPersonBooth } from "react-icons/fa";
 import { BsGear } from "react-icons/bs";
 import { CgFileDocument } from "react-icons/cg";
 import { Link, useLocation } from "react-router-dom";
@@ -21,32 +21,37 @@ const SideBar = () => {
     dispatch(logout());
   };
   return (
-    <div className={`sidebar  ${show && "showSideBar"}`}>
+    <div className={`sidebar ${show ? "showSideBar" : ""}`}>
       <div className="close" onClick={() => dispatch(showSideBar(false))}>
         <FaTimes />
       </div>
       <div className="top-icons">
         <Link to="/admin-side">
-          {/* <div className={`icon ${path === "/admin-side" && "active"}`}>
+          <div className={`icon ${path === "/admin-side" ? "active" : ""}`} title="Product Categories">
             <FaHome />
-          </div> */}
+          </div>
         </Link>
 
         <Link to="/admin-orders">
-          <div className={`icon ${path === "/admin-orders" && "active"}`}>
+          <div className={`icon ${path === "/admin-orders" ? "active" : ""}`} title="Orders">
             <FaBoxOpen />
           </div>
         </Link>
 
+        <Link to="/admin-products">
+          <div className={`icon ${path === "/admin-products" ? "active" : ""}`} title="Products List">
+            <CgFileDocument />
+          </div>
+        </Link>
+
         <Link to="/add-product">
-          <div className={`icon ${path === "/add-product" && "active"}`}>
+          <div className={`icon ${path === "/add-product" ? "active" : ""}`} title="Add Product">
             <FaPlus />
           </div>
         </Link>
 
         <Link to="/delivery-men">
-          {" "}
-          <div className={`icon ${path === "/delivery-men" && "active"}`}>
+          <div className={`icon ${path === "/delivery-men" ? "active" : ""}`} title="Delivery Men">
             <FaPersonBooth />
           </div>
         </Link>
@@ -65,12 +70,12 @@ const SideBar = () => {
         </Link> */}
 
       </div>
-      <Link to = "/">
-      <div className="bottom-icon">
+      <Link to="/">
+        <div className="bottom-icon">
           <div className="icon" onClick={handleSignOut}>
             <FiLogOut />
           </div>
-      </div>
+        </div>
       </Link>
     </div>
   );

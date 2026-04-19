@@ -1,38 +1,46 @@
 import jwt from 'jsonwebtoken'
-export const genrateToken =(user)=>{
-    return jwt.sign({
-        _id:user._id,
-        name:user.name,
-        eamil:user.email,
-        isAdmin:user.isAdmin,
-    },'BhaiKaBirthday',{
-        expiresIn:'30d',
+export const genrateToken = (user) => {
+  return jwt.sign({
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    isAdmin: user.isAdmin,
+  }, 'BhaiKaBirthday', {
+    expiresIn: '30d',
+  })
+}
+export const isAuth = (req, res, next) => {
+  const authorization = req.headers.authorization
+
+  if (authorization) {
+    const token = authorization.slice(7, authorization.length) //bearer token value
+    jwt.verify(token, 'BhaiKaBirthday', (err, decode) => {
+      if (err) {
+        res.status(401).send({ message: err.message })
+      }
+      else {
+        req.user = decode
+        next()
+      }
     })
-}
-export const isAuth=(req,res,next)=>{
-    const authorization=req.headers.authorization
-   
-    if(authorization){
-      const token = authorization.slice(7,authorization.length) //bearer token value
-      jwt.verify(token,'BhaiKaBirthday',(err,decode)=>{
-          if(err){
-              res.status(401).send({message:err.message})
-          }
-          else{
-              req.user=decode
-              next()
-          }
-      })
-    }
-    else{
-        res.status(401).send({message:'No token'})
+  }
+  else {
+    res.status(401).send({ message: 'No token' })
 
-    }
+  }
 }
 
+export const isAdmin = (req, res, next) => {
+  if (req.user && req.user.isAdmin) {
+    next();
+  } else {
+    res.status(401).send({ message: 'Invalid Admin Token' });
+  }
+};
 
-export const emailTemplate=(order)=>{
-    return `
+
+export const emailTemplate = (order) => {
+  return `
     <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
@@ -238,7 +246,7 @@ a[x-apple-data-detectors='true'] {
       <td style="overflow-wrap:break-word;word-break:break-word;padding:10px 10px 20px;font-family:arial,helvetica,sans-serif;" align="left">
         
   <div style="line-height: 140%; text-align: left; word-wrap: break-word;">
-    <p style="font-size: 14px; line-height: 140%; text-align: center;"><span style="color: #000000; font-size: 14px; line-height: 19.6px;"><span style="font-size: 16px; line-height: 22.4px; font-family: arial, helvetica, sans-serif;">This email is to confirm your recent order. </span><span style="font-size: 16px; line-height: 22.4px; font-family: arial, helvetica, sans-serif;"><strong>Order ID: ${order._id}</strong></span></span></p>
+    <p style="font-size: 14px; line-height: 140%; text-align: center;"><span style="color: #000000; font-size: 14px; line-height: 19.6px;"><span style="font-size: 16px; line-height: 22.4px; font-family: arial, helvetica, sans-serif;">This email is to confirm your recent order. </span><span style="font-size: 16px; line-height: 22.4px; font-family: arial, helvetica, sans-serif;"><strong>Order ID: ${order._id}</strong></span><br/><span style="font-size: 16px; line-height: 22.4px; font-family: arial, helvetica, sans-serif;"><strong>Order Preference: ${order.orderType || 'Take Away'}</strong></span></span></p>
   </div>
 
       </td>
@@ -358,8 +366,8 @@ a[x-apple-data-detectors='true'] {
 
 
 
-${order.orderItems.map((item)=>{
-  return `<div class="u-row-container ordered_products" style="padding: 0px;background-color: transparent">
+${order.orderItems.map((item) => {
+    return `<div class="u-row-container ordered_products" style="padding: 0px;background-color: transparent">
     <div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 640px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;">
       <div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">
         <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:640px;"><tr style="background-color: #ffffff;"><![endif]-->
@@ -437,8 +445,8 @@ ${order.orderItems.map((item)=>{
       </div>
     </div>
   </div> `
-})
-}
+  })
+    }
 <div class="u-row-container" style="padding: 0px;background-color: transparent">
   <div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 640px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;">
     <div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">

@@ -16,7 +16,7 @@ const Signin = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const userInfo = user?.user;
-  const redirect = location.search ? `/${location.search.split("=")[1]}` : "/";
+  const redirect = location.search ? `/${location.search.split("=")[1]}` : "/admin-side";
   console.log(redirect);
   //form validation
   let schema = yup.object().shape({
@@ -94,16 +94,13 @@ const Signin = () => {
           <div className="text">
             <Link to="/updatepassword">
               {" "}
-              
+
             </Link>
           </div>
-          <Link to="/admin-orders">
-          <button type="">{user?.loading ? <Spinner /> : "Login"}</button>
-          </Link>
-          
+          <button type="submit">{user?.loading ? <Spinner /> : "Login"}</button>
         </form>
         <div className="forget">
-            
+
         </div>
       </div>
     </div>
