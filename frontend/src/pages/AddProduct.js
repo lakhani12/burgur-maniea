@@ -49,14 +49,7 @@ const AddProduct = () => {
   }
 
   const handleOnChange = (e) => {
-    const reader = new FileReader();
-    if (e.target.files[0]) {
-      reader.readAsDataURL(e.target.files[0]);
-      setFileName(e.target.files[0]?.name);
-    }
-    reader.onload = (readerEvent) => {
-      setImg(readerEvent.target.result);
-    };
+    setImg(e.target.value);
   }
   return (
     <>
@@ -82,8 +75,8 @@ const AddProduct = () => {
                 <option value="Snak">snak</option>
                 <option value="Drink">drink</option>
               </select>
-              <label htmlFor="file">{fileName}</label>
-              <input type="file" id='file' onChange={handleOnChange} />
+              <label htmlFor="url">{'Image URL'}</label>
+              <input type="url" id='url' onChange={handleOnChange} value={img} />
               <button>{'Add'}</button>
 
             </form>

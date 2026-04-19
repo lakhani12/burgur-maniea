@@ -25,6 +25,7 @@ mongoose.connect(uri,
     });
 
 app.use(cors())
+app.use('/images', express.static(path.join(process.cwd(), 'Images')));
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter)
 app.use('/api/orders', orderRouter)
