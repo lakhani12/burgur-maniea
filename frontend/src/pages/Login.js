@@ -58,7 +58,11 @@ const Signin = () => {
 
   useEffect(() => {
     if (userInfo) {
-      navigate(redirect);
+      if (userInfo.isAdmin) {
+        navigate(redirect);
+      } else {
+        navigate("/");
+      }
     }
   }, [userInfo]);
 

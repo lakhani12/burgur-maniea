@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../styles/sidebar.css";
-import { FaHome, FaBoxOpen, FaTimes, FaPlus, FaPersonBooth } from "react-icons/fa";
+import { FaHome, FaBoxOpen, FaTimes, FaPlus, FaPersonBooth, FaUsers } from "react-icons/fa";
 import { BsGear } from "react-icons/bs";
 import { CgFileDocument } from "react-icons/cg";
 import { Link, useLocation } from "react-router-dom";
@@ -53,6 +53,12 @@ const SideBar = () => {
         <Link to="/delivery-men">
           <div className={`icon ${path === "/delivery-men" ? "active" : ""}`} title="Delivery Men">
             <FaPersonBooth />
+          </div>
+        </Link>
+
+        <Link to="/admin-users">
+          <div className={`icon ${path === "/admin-users" ? "active" : ""}`} title="User Management">
+            <FaUsers />
           </div>
         </Link>
 

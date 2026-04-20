@@ -22,7 +22,11 @@ const RightSide = ({data ,show}) => {
             <div className="header">
             
                {show&&<Link to="/add-product"> <button style={{marginRight:"10px"}}>Add Product</button></Link>}
-               {show?null:<Link to="/login"> <button style={{marginRight:"10px"}}>Admin</button></Link>}
+               {!show && (!user?.user || user?.user?.isAdmin) && (
+                   <Link to={user?.user?.isAdmin ? "/admin-side" : "/login"}>
+                       <button style={{marginRight:"10px"}}>Admin</button>
+                   </Link>
+               )}
                 {show?null:(<div className="user-info">
                 
                     {

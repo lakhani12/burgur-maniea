@@ -21,6 +21,8 @@ import AddProduct from './pages/AddProduct'
 import Login from './pages/Login'
 import Deliverymen from './pages/Deliverymen'
 import AdminProductsList from './pages/AdminProductsList'
+import AdminRoute from './components/AdminRoute'
+import AdminUsers from './pages/AdminUsers'
 
 const App = () => {
     return (
@@ -43,12 +45,13 @@ const App = () => {
                         <Route path="/wishlist" element={<Wishlist />} />
                         <Route path='/custom-pizza' element={<CustomPizza />} />
                         <Route path="/your-address" element={<Address />} />
-                        <Route path='/admin-side' element={<Admin />} />
-                        <Route path='/admin-orders' element={<AdminOrders />} />
-                        <Route path='/admin-products' element={<AdminProductsList />} />
-                        <Route path='/add-product' element={<AddProduct />} />
+                        <Route path='/admin-side' element={<AdminRoute><Admin /></AdminRoute>} />
+                        <Route path='/admin-orders' element={<AdminRoute><AdminOrders /></AdminRoute>} />
+                        <Route path='/admin-products' element={<AdminRoute><AdminProductsList /></AdminRoute>} />
+                        <Route path='/add-product' element={<AdminRoute><AddProduct /></AdminRoute>} />
                         <Route path='/login' element={<Login />} />
-                        <Route path='/delivery-men' element={<Deliverymen />} />
+                        <Route path='/delivery-men' element={<AdminRoute><Deliverymen /></AdminRoute>} />
+                        <Route path='/admin-users' element={<AdminRoute><AdminUsers /></AdminRoute>} />
 
                     </Routes>
                 </main>
